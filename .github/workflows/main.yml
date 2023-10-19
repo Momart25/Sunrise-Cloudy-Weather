@@ -3,7 +3,7 @@ name: main
 on:
   push:
     branches:
-      - main  # Adjust the branch name as needed
+      - main 
 
 jobs:
   build:
@@ -16,20 +16,19 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8  # Adjust Python version as needed
+        python-version: 3.8  
 
     - name: Install Dependencies
       run: |
         pip install --upgrade pip
-        pip install -r requirements.txt  # If you have a requirements file
+        pip install -r requirements.txt 
+        pip install pytest 
 
     - name: Run Tests
       run: |
-        pytest  # Replace with the command to run your tests
+        pytest  
 
     - name: Streamlit Test
       run: |
-        app.py
-
-
+        app.py  
 
