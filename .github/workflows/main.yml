@@ -1,4 +1,4 @@
-name: main
+name: Python Syntax Check and Tests
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  syntax_check:
+  syntax_check_and_tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,14 +21,21 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Install Super Linter
+    - name: Install Dependencies
       run: |
-        git clone https://github.com/github/super-linter.git
-        cd super-linter
-        ./install.sh
+        pip install -r requirements.txt  # Install project-specific dependencies
+      working-directory: ./app.py
+    - name: Run Syntax Check
+      run: |
+             flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+      working-directory: ./app.py
 
-    - name: Run Super Linter
+    - name: Run Tests
       run: |
-        export GITHUB_EVENT_PATH=$(pwd)/event.json
-        export GITHUB_WORKSPACE=$(pwd)
-        ./run-linter.sh
+            pytest
+      working-directory: ./path/to/your/project
+
+    - name: Push or Merge if Tests Pass
+      if: success()  # Only proceed if all previous steps were successful
+      run: |
+            git push origin main
