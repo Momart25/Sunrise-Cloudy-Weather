@@ -1,34 +1,18 @@
-name: main
+name: Super-Linter
 
-on:
-  push:
-    branches:
-      - main 
+on: push
 
 jobs:
-  build:
+  super-lint:
+    name: Lint code base
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8  
+      - name: Run Super-Linter
+        uses: github/super-linter@v3.17.0
 
-    - name: Install Dependencies
-      run: |
-        pip install --upgrade pip
-        pip install -r requirements.txt 
-        pip install pytest 
-
-    - name: Run Tests
-      run: |
-        pytest  
-
-    - name: Streamlit Test
-      run: |
-        app.py  
-
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
