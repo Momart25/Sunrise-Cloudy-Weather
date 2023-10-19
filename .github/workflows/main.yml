@@ -24,7 +24,7 @@ jobs:
     - name: Install Dependencies
       run: |
         pip install -r Sunrise-Cloudy-Weather/requirements.txt  # Install project-specific dependencies
-      working-directory: ./Sunrise-Cloudy-Weather/requirements.txt
+      working-directory: ./Sunrise-Cloudy-Weather/Sunrise-Cloudy-Weather/requirements.txt
 
     - name: Run Syntax Check
       run: |
