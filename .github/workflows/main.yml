@@ -3,14 +3,11 @@ name: main
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main  
 
 jobs:
-  syntax_check:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest 
 
     steps:
     - name: Checkout code
@@ -19,10 +16,11 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: 3.x  
 
-    - name: Install pyflakes
-      run: pip install pyflakes
+    - name: Install dependencies
+      run: pip install -r requirements.txt 
 
-    - name: Run pyflakes
-      run: pyflakes streamlit_app.py
+    - name: Run tests
+      run: |
+        pytest 
