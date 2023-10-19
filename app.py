@@ -8,6 +8,7 @@ from PIL import Image
 if "login_status" not in st.session_state:
     st.session_state.login_status = False
 
+
 def login():
     st.title("Login")
     username = st.text_input("Username")
@@ -20,6 +21,7 @@ def login():
         else:
             st.error("Incorrect username or password")
     return False
+
 
 def run_prediction():
     st.title("Prediction")
@@ -56,11 +58,13 @@ def run_prediction():
         string = "Prediction: " + class_name
         st.success(string)
 
+
 def check_login(username, password):
     # Replace with your authentication logic
     if username == "user" and password == "user":
         return True
     return False
+
 
 def main():
     # st.title("Group 4")
@@ -71,6 +75,7 @@ def main():
     else:
         st.subheader("Welcome to the Prediction Page")
         run_prediction()
+
 
 if __name__ == "__main__":
     main()
