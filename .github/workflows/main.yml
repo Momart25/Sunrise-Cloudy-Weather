@@ -3,23 +3,33 @@ name: main
 on:
   push:
     branches:
-      - main
+      - main  # Adjust the branch name as needed
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+    - name: Checkout Code
+      uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # Adjust Python version as needed
 
-      - name: Install Dependencies
-        run: npm install
+    - name: Install Dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt  # If you have a requirements file
 
-      - name: Run Tests
-        run: npm test
+    - name: Run Tests
+      run: |
+        pytest  # Replace with the command to run your tests
+
+    - name: Streamlit Test
+      run: |
+        app.py
+
+
+
