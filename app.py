@@ -5,7 +5,7 @@ import tensorflow as tf
 from PIL import Image
 
 # Create a session state to store login status
-if 'login_status' not in st.session_state:
+if "login_status" not in st.session_state:
     st.session_state.login_status = False
 
 def login():
