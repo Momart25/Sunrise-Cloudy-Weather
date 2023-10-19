@@ -24,18 +24,19 @@ jobs:
     - name: Install Dependencies
       run: |
         pip install -r requirements.txt  # Install project-specific dependencies
-      working-directory: /app.py
+      working-directory: ./Sunrise-Cloudy-Weather/requirements.txt
+
     - name: Run Syntax Check
       run: |
-             flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-      working-directory: /app.py
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+      working-directory: ./Sunrise-Cloudy-Weather/app.py
 
     - name: Run Tests
       run: |
-            pytest
-      working-directory: ./path/to/your/project
+        pytest
+      working-directory: ./Sunrise-Cloudy-Weather/app.py
 
     - name: Push or Merge if Tests Pass
       if: success()  # Only proceed if all previous steps were successful
       run: |
-            git push origin main
+        git push origin main
