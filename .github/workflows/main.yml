@@ -1,42 +1,30 @@
-name: Python Syntax Check and Tests
+name: main
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main  # Adjust the branch name as needed
 
 jobs:
-  syntax_check_and_tests:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Check Out Code
       uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
+    - name: Set Up Node.js
+      uses: actions/setup-node@v2
       with:
-        python-version: 3.8
+        node-version: 14
 
     - name: Install Dependencies
-      run: |
-        pip install -r requirements.txt  # Install project-specific dependencies
-      working-directory: /Sunrise-Cloudy-Weather/requirements.txt
-
-    - name: Run Syntax Check
-      run: |
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-      working-directory: ./Sunrise-Cloudy-Weather
+      run: npm install
 
     - name: Run Tests
-      run: |
-        pytest
-      working-directory: ./Sunrise-Cloudy-Weather
+      run: npm test
 
-    - name: Push or Merge if Tests Pass
-      if: success()  # Only proceed if all previous steps were successful
+    - name: Deploy If Tests Pass
+      if: success()
       run: |
-        git push origin main
+          git push origin main
