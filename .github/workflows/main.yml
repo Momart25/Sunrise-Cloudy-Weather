@@ -3,28 +3,23 @@ name: main
 on:
   push:
     branches:
-      - main  # Adjust the branch name as needed
+      - master
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check Out Code
-      uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-    - name: Set Up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
 
-    - name: Install Dependencies
-      run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-    - name: Run Tests
-      run: npm test
-
-    - name: Deploy If Tests Pass
-      if: success()
-      run: |
-          git push origin main
+      - name: Run Tests
+        run: npm test
